@@ -13,7 +13,7 @@
       command: sed -i "s/^Listen .*/Listen 8081/" /etc/apache2/ports.conf
 
     - name: Update VirtualHost port
-      command: sed -i "s/<VirtualHost .*>/<VirtualHost *:8081>/"/etc/apache2/sites-enabled/000-default.conf
+      command: sed -i "s/<VirtualHost .*>/<VirtualHost *:8081>/" /etc/apache2/sites-enabled/000-default.conf
 
     - name: Restart Apache service
       command: systemctl restart apache2
