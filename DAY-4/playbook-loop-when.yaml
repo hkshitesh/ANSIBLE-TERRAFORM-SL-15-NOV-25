@@ -1,0 +1,23 @@
+---
+- hosts: dbservers
+  become: yes
+  vars:
+    operation: install   # change to 'remove' to uninstall packages
+    packages:
+      - git
+      - htop
+
+  tasks:
+    - name: Install packages
+      action: apt name={{ item }} state=present update_cache=yes
+      loop: "{{ packages }}"
+      when: operation == "install"
+
+    - name: Remove packages
+      action: apt name={{ item }} state=absent purge=yes
+      loop: "{{ packages }}"
+      when: operation == "remove"
+
+    - name: Autoremove unused packages (only on removal)
+      action: apt autoremove=yes
+      when: operation == "remove"
