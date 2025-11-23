@@ -1,0 +1,15 @@
+---
+- hosts: dbservers
+  become: yes
+  vars:
+    currstate: absent
+
+  tasks:
+    - name: Remove HTOP
+      action: apt name=htop state='{{ currstate }}' purge=yes
+
+    - name: Remove Git
+      action: apt name=git state='{{ currstate }}' purge=yes
+
+    - name: Autoremove unused packages
+      action: apt autoremove=yes
