@@ -1,5 +1,5 @@
 ---
-- hosts: dbservers
+- hosts: webservers
   become: yes
   vars:
     currstate: absent
